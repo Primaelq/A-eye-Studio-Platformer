@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     Transform playerTransform, groundDetector;
     Rigidbody2D playerRgb;
+    PlayerAnimatorController playerAnimator;
 
     bool isGrounded = false;
     float horizontalInput = 0.0f;
@@ -18,28 +19,31 @@ public class PlayerController : MonoBehaviour
         playerRgb = this.GetComponent<Rigidbody2D>();
         playerTransform = this.transform;
         groundDetector = GameObject.Find(this.name + "/GroundDetector").transform;
+        playerAnimator = PlayerAnimatorController.instance;
 	}
 
 	void Update ()
 	{
-        
+
     }
 
     void FixedUpdate ()
     {
-        isGrounded = Physics2D.Linecast(playerTransform.position, groundDetector.position, playerLayerMask);
+        if (playerRgb.velocity.y != 0.0f)
+            isGrounded = Physics2D.Linecast(playerTransform.position, groundDetector.position, playerLayerMask);
 
-        #if !UNITY_ANDROID && !UNITY_IPHONE && !UNITY_BLACKBERRY && !UNITY_WINRT
+        playerAnimator.IsGrounded(isGrounded);
 
-        Move(Input.GetAxisRaw ("Horizontal"));
+        #if !UNITY_ANDROID && !UNITY_IPHONE && !UNITY_BLACKBERRY && !UNITY_WINRT || UNITY_EDITOR
 
-        if (Input.GetButtonDown("Jump"))
-            Jump();
-        
-        #else
-            Move(horizontalInput);
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+            playerAnimator.UpdateSpeed(horizontalInput);
+            if (Input.GetButtonDown("Jump"))
+                Jump();
+
         #endif
 
+        Move(horizontalInput);
     }
 
     public void Move (float hInput)
@@ -58,5 +62,6 @@ public class PlayerController : MonoBehaviour
     public void StartMoving (float hInput)
     {
         horizontalInput = hInput;
+        playerAnimator.UpdateSpeed(horizontalInput);
     }
 }
