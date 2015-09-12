@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D playerRgb;
     PlayerAnimatorController playerAnimator;
 
-    bool isGrounded = false;
+    bool isGrounded = true;
     float horizontalInput = 0.0f;
 
 	void Start ()
