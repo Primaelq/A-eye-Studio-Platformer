@@ -2,8 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class HUD : MonoBehaviour
-{
+public class HUD : MonoBehaviour {
+
     public Sprite heartFull;
     public Sprite heartHalf;
     public Sprite heartEmpty;
@@ -13,12 +13,12 @@ public class HUD : MonoBehaviour
 
     private int health;
 
-    void Start ()
+    void Start()
     {
 
     }
-	
-	void Update ()
+
+    void Update()
     {
         health = PlayerController.health;
 
@@ -66,5 +66,5 @@ public class HUD : MonoBehaviour
                 heart2.sprite = heartFull;
                 break;
         }
-	}
+    }
 }
