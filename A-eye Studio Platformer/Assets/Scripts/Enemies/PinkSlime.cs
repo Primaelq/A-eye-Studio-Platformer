@@ -8,6 +8,7 @@ public class PinkSlime : MonoBehaviour
     Rigidbody2D slimeRgb;
     Transform slimeTransform;
     float slimeWidth, slimeHeight;
+    bool hit = false;
 
 	void Start ()
     {
@@ -37,4 +38,12 @@ public class PinkSlime : MonoBehaviour
         slimeVel.x = -slimeTransform.right.x * speed;
         slimeRgb.velocity = slimeVel;
 	}
+
+    void OnCollisionEnter2D (Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            PlayerController.health -= 1;
+        }
+    }
 }
