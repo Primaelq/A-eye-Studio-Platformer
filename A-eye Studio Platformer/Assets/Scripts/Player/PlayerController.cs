@@ -4,8 +4,11 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
 
+<<<<<<< HEAD
     public static int health;
 
+=======
+>>>>>>> origin/master
     public float speed = 10.0f, jumpForce = 10.0f;
     public LayerMask playerLayerMask;
 
@@ -22,8 +25,12 @@ public class PlayerController : MonoBehaviour
         playerTransform = this.transform;
         groundDetector = GameObject.Find(this.name + "/GroundDetector").transform;
         playerAnimator = PlayerAnimatorController.instance;
+<<<<<<< HEAD
         health = 6;
     }
+=======
+	}
+>>>>>>> origin/master
 
 	void Update ()
 	{
