@@ -37,7 +37,6 @@ public class PinkSlime : MonoBehaviour
         slimeVel.x = -slimeTransform.right.x * speed;
         slimeRgb.velocity = slimeVel;
 	}
-<<<<<<< HEAD
 
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -46,6 +45,4 @@ public class PinkSlime : MonoBehaviour
             PlayerController.health -= 1;
         }
     }
-=======
->>>>>>> origin/master
 }
