@@ -9,6 +9,8 @@ public class PinkSlime : MonoBehaviour
     Transform slimeTransform;
     float slimeWidth, slimeHeight;
 
+    bool hit = false;
+
 	void Start ()
     {
         slimeTransform = this.transform;
@@ -18,6 +20,11 @@ public class PinkSlime : MonoBehaviour
         slimeHeight = slimeSprite.bounds.extents.y;
     }
 	
+    void Update()
+    {
+        hit = PlayerController.hitting;
+    }
+
 	void FixedUpdate ()
     {
         Vector2 lineCastPos = slimeTransform.position.ToVector2() - slimeTransform.right.ToVector2() * slimeWidth + Vector2.up * slimeHeight;
@@ -40,9 +47,13 @@ public class PinkSlime : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && hit == false)
         {
             PlayerController.health -= 1;
+        }
+        else if (hit == true)
+        {
+            Destroy (gameObject);
         }
     }
 }
